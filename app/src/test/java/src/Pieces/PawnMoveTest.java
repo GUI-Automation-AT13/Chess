@@ -1,6 +1,7 @@
 package src.Pieces;
 
 import org.junit.Test;
+import src.PiecesMoves.Castling;
 import src.PiecesMoves.PawnMove;
 import src.Utilities.Chessboard;
 import src.Utilities.GetPieceFactory;
@@ -152,5 +153,28 @@ public class PawnMoveTest {
         Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position(11,12)));
         Piece pawn = Chessboard.board[12][11];
         pawn.setIsMoved(true);
+    }
+
+    @Test
+    public void pawnIsNotInLimits_10_Pos() {
+        PawnMove pawn = new PawnMove();
+        boolean actual = pawn.isInLimits(10);
+        assertEquals(false, actual);
+    }
+
+    @Test
+    public void spaceIsNotEmpty_SameColorPieceIsThere() {
+        PawnMove pawn = new PawnMove();
+        Piece otherPaw = new Pawn(true, new Position(0, 0));
+        boolean actual = pawn.isSpaceWithEnemy(otherPaw, true);
+        assertEquals(false, actual);
+    }
+
+    @Test
+    public void spaceIsNotEmpty_EnemyPieceIsThere() {
+        PawnMove pawn = new PawnMove();
+        Piece otherPawn = new Rook(false, new Position(3, 3));
+        boolean actual = pawn.isSpaceWithEnemy(otherPawn, true);
+        assertEquals(true, actual);
     }
 }

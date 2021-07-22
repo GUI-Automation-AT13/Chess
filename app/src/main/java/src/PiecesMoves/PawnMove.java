@@ -56,7 +56,10 @@ public class PawnMove implements MovePiece {
      * @return true is space is empty or has a piece of different color, false if has piece of same color
      */
     public boolean isSpaceEmpty(final Piece piece) {
-        return piece == null;
+        if (piece == null) {
+            return true;
+        } else
+            return false;
     }
 
     /**
@@ -82,6 +85,10 @@ public class PawnMove implements MovePiece {
      */
     @Override
     public boolean isInLimits(final int position) {
-        return (0 <= position && position < Chessboard.DIMENSION);
+        if (0 <= position && position < Chessboard.DIMENSION) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
