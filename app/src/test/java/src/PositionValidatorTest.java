@@ -35,6 +35,13 @@ public class PositionValidatorTest {
         assertEquals(expected, actual);
     }
     @Test
+    public void isMoveValidGiven_f2_k4_return_false() {
+        PositionValidator positionValidator = new PositionValidator("f2 k4");
+        boolean expected = false;
+        boolean actual = positionValidator.isMoveValid();
+        assertEquals(expected, actual);
+    }
+    @Test
     public void isMoveValidGiven_a0_v6_return_false() {
         PositionValidator positionValidator = new PositionValidator("a0 v6");
         boolean expected = false;
