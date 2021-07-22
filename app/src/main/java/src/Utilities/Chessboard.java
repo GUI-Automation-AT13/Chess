@@ -189,13 +189,10 @@ public class Chessboard {
     /**
      * Reset the Chessboard.
      */
-    public void resetChessBoard() {
-        for (int row = 0; row < DIMENSION; row++) {
-            for (int col = 0; col < DIMENSION; col++) {
-                board[row][col] = null;
-            }
-        }
+    public Piece[][] resetChessBoard() {
+        return new Piece[DIMENSION][DIMENSION];
     }
+
     public void setWinnerNull() {
         this.winner = null;
     }
