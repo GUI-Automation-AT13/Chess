@@ -2,9 +2,7 @@ package src;
 
 import org.junit.Test;
 import src.Pieces.Piece;
-import src.Utilities.Chessboard;
-import src.Utilities.Player;
-import src.Utilities.Position;
+import src.Utilities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,75 @@ import static org.junit.Assert.*;
 import static src.Utilities.Chessboard.DIMENSION;
 
 public class ChessboardTest {
+    private Chessboard chessboard;
+    private GetPieceFactory getPieceFactory;
+
+    private void chessboardScenario() {
+        chessboard = new Chessboard();
+        int dimensionBoard = 8;
+        chessboard.board = new Piece[dimensionBoard][dimensionBoard];
+        getPieceFactory = new GetPieceFactory();
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.ROOK, false, new Position(0, 0)));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.ROOK, false, new Position(7, 0)));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.KING, false, new Position(4, 0)));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.ROOK, true, new Position(0, 7)));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.ROOK, true, new Position(7, 7)));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.ROOK, true, new Position(4, 7)));
+        /**
+         *   ---------------------------------------
+         * 8 | BR |    |    |    | BK |    |    | BR |
+         *   |---------------------------------------
+         * 7 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 6 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 5 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 4 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 3 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 2 |    |    |    |    |    |    |    |    |
+         *   |---------------------------------------
+         * 1 | WR |    |    |    | WK |    |    | WR |
+         *   |---------------------------------------
+         *     a    b    c    d    e    f    g    h
+         */
+    }
+    @Test
+    public void playingWhite_whitePlayerCanMoveBlackPiece_false2() {
+        chessboardScenario();
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.QUEEN, false, new Position(4, 0)));
+        Player playerWhite = new Player("Player1", false);
+        Position source = new Position("e8");
+        Position target = new Position("c3");
+        boolean actual=chessboard.movePiece(source, target, playerWhite);
+        boolean expected = false;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playingWhite_whitePlayerCanMoveBlackPiece_false() {
+        chessboardScenario();
+        Player playerWhite = new Player("Player1", true);
+        Position source = new Position("e8");
+        Position target = new Position("c8");
+        boolean actual=chessboard.movePiece(source, target, playerWhite);
+        boolean expected = false;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void playingBlack_isValidateCastling_true() {
+        chessboardScenario();
+        Player playerWhite = new Player("Player1", false);
+        Position source = new Position("e8");
+        Position target = new Position("c8");
+        boolean actual=chessboard.movePiece(source, target, playerWhite);
+        boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
 
     @Test
     public void selectsEmptySpace_return_emptyValidMoves() {
