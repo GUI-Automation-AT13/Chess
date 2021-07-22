@@ -5,8 +5,9 @@ import src.Views.ChessboardView;
 import javax.swing.*;
 import java.util.Scanner;
 
+import static src.Utilities.Chessboard.board;
+
 public class Game {
-    private int gameId;
     private Player playerWhite;
     private Player playerBlack;
     private Chessboard chessboard;
@@ -16,23 +17,24 @@ public class Game {
     private boolean gameFinished = false;
     private ChessboardView chessboardView;
     private Scanner sc;
+
     /**
      * Game represents a match between 2 players and controls the cycle of turns.
+     *
      * @param id of game.
      */
     public Game(final int id) {
-        this.gameId = id;
         chessboard = new Chessboard();
         chessboard.initializeChessboard();
         playerWhite = new Player("Player1", PLAYER_WHITE);
         playerBlack = new Player("Player2", PLAYER_BLACK);
         chessboardView = new ChessboardView(this);
     }
+
     /**
      * Initializes the game logic.
      */
     public void gameInit() {
-        chessboard.printBoard();
         while (!gameFinished) {
             playerTurn(playerWhite);
             if (chessboard.kingTakenBy() != null) {
@@ -41,7 +43,7 @@ public class Game {
                         "New game",
                         "Cancel",
                         JOptionPane.YES_NO_CANCEL_OPTION);
-                if(action == JOptionPane.YES_OPTION){
+                if (action == JOptionPane.YES_OPTION) {
                     restartGame();
                 }
                 break;
@@ -54,6 +56,7 @@ public class Game {
 
     /**
      * Set player turn and player move.
+     *
      * @param player player turn.
      */
     public void playerTurn(final Player player) {
@@ -61,10 +64,10 @@ public class Game {
         Position toGetpossibles = null;
         Position sourceMove = null;
         Position targetMove = null;
-        while(!hasMoved) {
+        while (!hasMoved) {
             toGetpossibles = chessboardView.getPositionSelected();
             System.out.print("");
-            if(toGetpossibles != null && chessboard.thereIsPiece(toGetpossibles) && chessboard.getPiece(toGetpossibles).getColorWhite() == player.isWhite()) {
+            if (toGetpossibles != null && chessboard.thereIsPiece(toGetpossibles) && chessboard.getPiece(toGetpossibles).getColorWhite() == player.isWhite()) {
                 chessboardView.showValidMoves(chessboard.getValidMoves(toGetpossibles, player));
                 chessboardView.setPositionSelected(null);
                 sourceMove = toGetpossibles;
@@ -86,12 +89,11 @@ public class Game {
      * Restart the game.
      */
     public void restartGame() {
-        chessboard.resetChessBoard();
+        board = chessboard.resetChessBoard();
         chessboard.initializeChessboard();
         chessboardView.updateChessboardView();
         chessboard.setWinnerNull();
         gameFinished = false;
         gameInit();
-
     }
 }

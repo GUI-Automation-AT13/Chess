@@ -1,6 +1,8 @@
 package src.Pieces;
 
 import org.junit.Test;
+import src.PiecesMoves.Castling;
+import src.PiecesMoves.DiagonalsMove;
 import src.Utilities.Chessboard;
 import src.Utilities.GetPieceFactory;
 import src.Utilities.Position;
@@ -147,5 +149,26 @@ public class BishopTest {
         char actual = bishop.getFigure();
         char expected = 'B';
         assertEquals(expected, actual);
+    }
+    @Test
+    public void isInLimits_8_returnFalse() {
+        DiagonalsMove diagonalsMove = new DiagonalsMove();
+        boolean expected = false;
+        boolean actual = diagonalsMove.isInLimits(8);
+        assertEquals(actual, expected);
+    }
+    @Test
+    public void isInLimits_7_returnTrue() {
+        DiagonalsMove diagonalsMove = new DiagonalsMove();
+        boolean expected = true;
+        boolean actual = diagonalsMove.isInLimits(7);
+        assertEquals(actual, expected);
+    }
+    @Test
+    public void isInLimits_0_returnTrue() {
+        DiagonalsMove diagonalsMove = new DiagonalsMove();
+        boolean expected = true;
+        boolean actual = diagonalsMove.isInLimits(0);
+        assertEquals(actual, expected);
     }
 }
