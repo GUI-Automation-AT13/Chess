@@ -164,4 +164,11 @@ public class BishopTest {
         boolean actual = diagonalsMove.isInLimits(7);
         assertEquals(actual, expected);
     }
+    @Test
+    public void isInLimits_0_returnTrue() {
+        DiagonalsMove diagonalsMove = new DiagonalsMove();
+        boolean expected = true;
+        boolean actual = diagonalsMove.isInLimits(0);
+        assertEquals(actual, expected);
+    }
 }
