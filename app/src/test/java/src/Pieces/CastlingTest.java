@@ -1,17 +1,16 @@
 package src.Pieces;
 
 import org.junit.Test;
-import src.Utilities.Chessboard;
-import src.Utilities.GetPieceFactory;
+import src.Utilities.*;
 import src.PiecesMoves.Castling;
-import src.Utilities.Position;
-import src.Utilities.TypePiece;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class CastlingTest {
+    private Chessboard chessboard = new Chessboard();
+
     private void chessboardScenario() {
         Chessboard chessboard = new Chessboard();
         int dimensionBoard = 8;
@@ -41,6 +40,19 @@ public class CastlingTest {
          *   |---------------------------------------
          *     a    b    c    d    e    f    g    h
          */
+    }
+
+    @Test
+    public void isMovedRook_true() {
+        chessboardScenario();
+        Castling castling = new Castling();
+        Player playerWhite = new Player("Player2", false);
+        Position source = new Position("h8");
+        Position target = new Position("h7");
+        chessboard.movePiece(source, target, playerWhite);
+        boolean actual = castling.isHaveMoved(Chessboard.board[1][7]);
+        boolean expected = true;
+        assertEquals(expected, actual);
     }
 
     @Test

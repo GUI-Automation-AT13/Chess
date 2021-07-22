@@ -37,7 +37,6 @@ public class Game {
      * Initializes the game logic.
      */
     public void gameInit() {
-        chessboard.printBoard();
         while (!gameFinished) {
             playerTurn(playerWhite);
             if (chessboard.kingTakenBy() != null) {

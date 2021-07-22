@@ -41,28 +41,6 @@ public class Chessboard {
     }
 
     /**
-     * Prints the board in console.
-     */
-    public void printBoard() {
-        System.out.println("   ---------------------------------------");
-        for (int row = 0; row < DIMENSION; row++) {
-            System.out.print(DIMENSION - row + " |");
-            for (int col = 0; col < DIMENSION; col++) {
-                if (board[row][col] != null) {
-                    Piece piece = board[row][col];
-                    String figure = " " + String.valueOf(piece.getColor()) + String.valueOf(piece.getFigure()) + " |";
-                    System.out.print(figure);
-                } else {
-                    System.out.print("    " + "|");
-                }
-            }
-            System.out.println("");
-            System.out.println("  |---------------------------------------");
-        }
-        System.out.println("    a    b    c    d    e    f    g    h");
-    }
-
-    /**
      * Checks if a piece can be moved in the board while checking if the move is
      * castling or the king has been taken.
      * @param source position.
