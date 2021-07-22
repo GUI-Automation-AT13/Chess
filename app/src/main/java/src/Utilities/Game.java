@@ -8,7 +8,6 @@ import java.util.Scanner;
 import static src.Utilities.Chessboard.board;
 
 public class Game {
-    private int gameId;
     private Player playerWhite;
     private Player playerBlack;
     private Chessboard chessboard;
@@ -25,7 +24,6 @@ public class Game {
      * @param id of game.
      */
     public Game(final int id) {
-        this.gameId = id;
         chessboard = new Chessboard();
         chessboard.initializeChessboard();
         playerWhite = new Player("Player1", PLAYER_WHITE);
@@ -97,6 +95,5 @@ public class Game {
         chessboard.setWinnerNull();
         gameFinished = false;
         gameInit();
-
     }
 }

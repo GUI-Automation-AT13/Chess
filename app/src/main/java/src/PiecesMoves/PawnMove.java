@@ -58,8 +58,8 @@ public class PawnMove implements MovePiece {
     public boolean isSpaceEmpty(final Piece piece) {
         if (piece == null) {
             return true;
-        }
-        return false;
+        } else
+            return false;
     }
 
     /**
@@ -72,8 +72,9 @@ public class PawnMove implements MovePiece {
     public boolean isSpaceWithEnemy(final Piece piece, final boolean isWhite) {
         if (piece != null && piece.getColorWhite() != isWhite) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -86,7 +87,8 @@ public class PawnMove implements MovePiece {
     public boolean isInLimits(final int position) {
         if (0 <= position && position < Chessboard.DIMENSION) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
