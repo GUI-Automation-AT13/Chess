@@ -1,6 +1,7 @@
 package src.Pieces;
 
 import org.junit.Test;
+import src.PiecesMoves.PawnMove;
 import src.Utilities.Chessboard;
 import src.Utilities.GetPieceFactory;
 import src.Utilities.Position;
@@ -114,5 +115,42 @@ public class PawnMoveTest {
         char actual = pawn.getFigure();
         char expected = 'P';
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void pawnCantMoveOutsideOfTheBoard() {
+        int initPosX = 15;
+        int initPosY = 15;
+        Piece pawn = Chessboard.board[initPosY][initPosX];
+        pawn.setIsMoved(true);
+        List<Position> validMoves = pawn.getValidMoves();
+    }
+
+    @Test
+    public void spaceIsNotEmpty() {
+        chessboardScenario();
+        GetPieceFactory getPieceFactory = new GetPieceFactory();
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position(5,6)));
+        Piece pawn = Chessboard.board[6][5];
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position("e3")));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position("g3")));
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position("f3")));
+        pawn.setIsMoved(true);
+        List<Position> validMoves = pawn.getValidMoves();
+        String expected = "";
+        String actual = "";
+        for (Position pos : validMoves) {
+            actual += (pos.getCharAlg()) + " ";
+        }
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void pawnIsNotInLimits() {
+        chessboardScenario();
+        GetPieceFactory getPieceFactory = new GetPieceFactory();
+        Chessboard.setPiece(getPieceFactory.getPiece(TypePiece.PAWN, true, new Position(11,12)));
+        Piece pawn = Chessboard.board[12][11];
+        pawn.setIsMoved(true);
     }
 }
